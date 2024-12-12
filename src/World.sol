@@ -51,7 +51,13 @@ contract World is ERC721 {
         numberOfProperties++;
     }
 
+    function getNumberOfProperties() public view returns(uint256) {
+        return numberOfProperties;
+    }
 
+    function getPositionOf(uint256 _propertyID) public view returns(Position memory){
+        return _registerProperties[_propertyID];
+    }
 
     
 }
