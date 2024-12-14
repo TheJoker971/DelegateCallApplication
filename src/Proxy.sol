@@ -2,7 +2,6 @@
 pragma solidity ^0.8.13;
 
 contract Proxy {
-
     error AUTHORIZATION_DENIED();
     error DELEGATION_FAILED();
 
@@ -25,36 +24,36 @@ contract Proxy {
     address private immutable _owner;
     address private _delegation;
 
-    constructor(){
+    constructor() {
         _owner = msg.sender;
     }
 
     modifier _isOwner(address _sender) {
-        if(_owner != _sender){
+        if (_owner != _sender) {
             revert AUTHORIZATION_DENIED();
         }
         _;
     }
 
-    function setDelegation(address _impl) _isOwner(msg.sender) public {
+    function setDelegation(address _impl) public _isOwner(msg.sender) {
         _delegation = _impl;
     }
 
-    function getDelegation() public view returns(address) {
+    function getDelegation() public view returns (address) {
         return _delegation;
     }
 
-    function getNumberOfProperties() public view returns(uint256) {
+    function getNumberOfProperties() public view returns (uint256) {
         return numberOfProperty;
     }
 
-    function getPositionOf(uint256 _propertyID) public view returns(Position memory) {
+    function getPositionOf(uint256 _propertyID) public view returns (Position memory) {
         return _positionOfProperty[_propertyID];
     }
 
     fallback() external {
         (bool success,) = _delegation.delegatecall(msg.data);
-        if(!success) {
+        if (!success) {
             revert DELEGATION_FAILED();
         }
     }
