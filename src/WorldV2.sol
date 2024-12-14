@@ -6,6 +6,8 @@ contract World {
     error POSITION_ALREADY_USED(uint256, uint256);
     error AUTHORIZATION_DENIED();
 
+    event Transfer(address,address,uint256);
+
     string public name;
     string public symbol;
 
@@ -22,10 +24,7 @@ contract World {
         uint256 y;
     }
 
-    constructor(string memory _name, string memory _symbol) {
-        name = _name;
-        symbol = _symbol;
-    }
+    constructor() {}
 
     modifier _positionNotUsed(uint256 _x, uint256 _y) {
         if (_registerPosition[_x][_y]) {
@@ -81,5 +80,10 @@ contract World {
 
     function getPositionOf(uint256 _propertyID) public view returns (Position memory) {
         return _positionOfProperty[_propertyID];
+    }
+
+    function transfer(address _to, uint256 _propertyID) _isOwner(tx.origin,_propertyID) public {
+        _update(_to,_propertyID);
+        emit Transfer(tx.origin,_to,_propertyID);
     }
 }
