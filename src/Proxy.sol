@@ -40,6 +40,18 @@ contract Proxy {
         _delegation = _impl;
     }
 
+    function getDelegation() public view returns(address) {
+        return _delegation;
+    }
+
+    function getNumberOfProperties() public view returns(uint256) {
+        return numberOfProperty;
+    }
+
+    function getPositionOf(uint256 _propertyID) public view returns(Position memory) {
+        return _positionOfProperty[_propertyID];
+    }
+
     fallback() external {
         (bool success,) = _delegation.delegatecall(msg.data);
         if(!success) {

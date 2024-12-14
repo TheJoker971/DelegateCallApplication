@@ -77,5 +77,13 @@ contract World{
         numberOfProperty++;
     }
 
+    function getNumberOfProperties() public view returns(uint256) {
+        return numberOfProperty;
+    }
+
+    function getPositionOf(uint256 _propertyID) public view returns(Position memory) {
+        return _positionOfProperty[_propertyID];
+    }
+
     
 }
