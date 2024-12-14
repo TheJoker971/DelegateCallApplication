@@ -71,7 +71,7 @@ contract World{
         }
     }
 
-    function mint(uint256 _x, uint256 _y) public {
+    function mint(uint256 _x, uint256 _y) _positionNotUsed(_x,_y) public {
         _update(tx.origin,numberOfProperty);
         _addingPosition(numberOfProperty,_x,_y);
         numberOfProperty++;
