@@ -6,7 +6,7 @@ contract WorldV2 {
     error POSITION_ALREADY_USED(uint256, uint256);
     error AUTHORIZATION_DENIED();
 
-    event Transfer(address,address,uint256);
+    event Transfer(address, address, uint256);
 
     string public name;
     string public symbol;
@@ -74,11 +74,11 @@ contract WorldV2 {
         numberOfProperty++;
     }
 
-    function balanceOf(address _addr) public view returns(uint256) {
+    function balanceOf(address _addr) public view returns (uint256) {
         return _balances[_addr];
     }
 
-    function ownerOf(uint256 _propertyID) public view returns(address) {
+    function ownerOf(uint256 _propertyID) public view returns (address) {
         return _owners[_propertyID];
     }
 
@@ -90,8 +90,8 @@ contract WorldV2 {
         return _positionOfProperty[_propertyID];
     }
 
-    function transfer(address _to, uint256 _propertyID) _isOwner(tx.origin,_propertyID) public {
-        _update(_to,_propertyID);
-        emit Transfer(tx.origin,_to,_propertyID);
+    function transfer(address _to, uint256 _propertyID) public _isOwner(tx.origin, _propertyID) {
+        _update(_to, _propertyID);
+        emit Transfer(tx.origin, _to, _propertyID);
     }
 }

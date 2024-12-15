@@ -43,11 +43,11 @@ contract Proxy {
         return _delegation;
     }
 
-    function balanceOf(address _addr) public view returns(uint256) {
+    function balanceOf(address _addr) public view returns (uint256) {
         return _balances[_addr];
     }
 
-    function ownerOf(uint256 _propertyID) public view returns(address) {
+    function ownerOf(uint256 _propertyID) public view returns (address) {
         return _owners[_propertyID];
     }
 
