@@ -6,7 +6,7 @@ contract WorldV2 {
     error POSITION_ALREADY_USED(uint256, uint256);
     error AUTHORIZATION_DENIED();
 
-    event Transfer(address, address, uint256);
+    event Transfer(address indexed _from, address indexed _to, uint256 _propertyID);
 
     string public name;
     string public symbol;
