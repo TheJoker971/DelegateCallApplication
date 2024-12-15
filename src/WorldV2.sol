@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-contract World {
+contract WorldV2 {
     error NOT_VALID_ADDRESS();
     error POSITION_ALREADY_USED(uint256, uint256);
     error AUTHORIZATION_DENIED();
@@ -72,6 +72,14 @@ contract World {
         _update(tx.origin, numberOfProperty);
         _addingPosition(numberOfProperty, _x, _y);
         numberOfProperty++;
+    }
+
+    function balanceOf(address _addr) public view returns(uint256) {
+        return _balances[_addr];
+    }
+
+    function ownerOf(uint256 _propertyID) public view returns(address) {
+        return _owners[_propertyID];
     }
 
     function getNumberOfProperties() public view returns (uint256) {
