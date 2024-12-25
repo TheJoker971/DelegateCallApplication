@@ -8,7 +8,7 @@ contract Proxy {
     string public name;
     string public symbol;
 
-    uint256 numberOfProperty;
+    uint256 public numberOfProperty;
 
     mapping(uint256 propertyID => address) private _owners;
     mapping(address owner => uint256) private _balances;
